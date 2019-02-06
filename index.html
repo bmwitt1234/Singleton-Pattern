@@ -1,0 +1,33 @@
+// Try it here. https://jsbin.com/?js,console
+
+var SingletonTester = (function () {
+    //This is the actual singleton instance
+    function Singleton() {
+        this.name = "Singleton";
+        this.pointX = 74;
+    }
+
+    // this is our instance holder
+    var instance;
+
+    // this is an emulation of static variables and methods
+    var _static = {
+        name: 'SingletonTester',
+        // This is a method for getting an instance
+        // It returns the same instance of the singleton object
+        getInstance: function () {
+            if (instance === undefined) {
+                instance = new Singleton();
+            }
+            return instance;
+        }
+    };
+    return _static;
+})();
+
+//getInstance method is the only method we can call on the returned _static object
+var singletonTest = SingletonTester.getInstance();
+
+console.log(singletonTest.pointX); // outputs 74
+singletonTest.pointX = 25;
+console.log(singletonTest.pointX); // outputs 25
